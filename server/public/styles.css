@@ -1,52 +1,76 @@
 body {
     background-color: black;
-    color: black;
+    color: white;
     margin: 0px;
+    display: inline;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 header {
     background-color: white;
     color: black;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
 }
 
-#buttons {
-    width: 50%;
-    float: left;
-    margin: 20px 0px 50px 20px;
-    padding: 30px 20px 30px 30px;
-    border: 2px solid rgb(48, 48, 48);
-    box-shadow: 0px 0px 3px 3px rgb(30, 30, 30);
-}
-
-#history {
-    width: 30%;
-    float: right;
-    margin-top: 20px;
-    padding: 20px;
-    color: white;
-}  
-
+/* Style for display screen on calculator */
 #display {
     width: 160px;
     display: inline-block;
     border: 1px solid rgb(55, 55, 55);
-    box-shadow: inset 0px 0px 3px 3px rgb(49, 49, 49);
+    box-shadow: inset 0px 0px 3px 3px rgb(30, 30, 30);
     color: white;
     margin-left: 20px;
     padding: 20px 20px;
     font-size: 20px;
+    background-color: black
 }
 
+/* Style for calculator */
+#calculator {
+    width: 335px;
+    float: left;
+    margin: 30px 0px 50px 20px;
+    padding: 30px 20px 30px 30px;
+    border: 2px solid rgb(48, 48, 48);
+    box-shadow: 0px 0px 3px 3px rgb(30, 30, 30);
+    background-color: black
+}
+
+/* Style for history display */
+#history {
+    width: calc(100% - 500px);
+    float: right;
+    margin-top: 30px;
+    padding: 20px;
+    color: white;
+    font-size: 18px;
+}  
+
+/* Default style for all buttons */
 button {
     background-color: rgb(37, 37, 37);
     color: white;
+    font-weight: 500;
     border: none;
     border-radius: 40px;
     font-size: 20px;
-    margin: 5px;
+    margin: 8px;
     padding: 20px 25px 20px 25px;
     display: inline;
     float: center;
+}
+
+/* Styles for specific buttons */
+.operator {
+    background-color: rgb(146, 95, 0);
+}
+
+.equal {
+    background-color: rgb(31, 94, 131);
+}
+
+.decimal {
+    padding: 20px 28px 20px 28px;
+    font-weight: bold;
 }

@@ -17,8 +17,8 @@ Checklist:
 -✅ (server GET) send history to client when requested
 -✅ (client POST) send input to server 
 -✅ (server POST) retrieve input, calculate output, add both to history
-- finish styling
+- finish styling (mostly done)
 - (client DELETE + server DELETE) remove history from server and display
 - ability to re-run calculation
 
-PUSHED x7 
+PUSHED x8
