@@ -11,7 +11,8 @@ Additional README details can be found [here](https://github.com/PrimeAcademy/re
 
 Checklist:
 ✅ Set up and linked base files
-- create buttons for all numbers, operators, + clear option (clears input fields)
+✅ Create buttons for all numbers, operators, + clear option (clears input fields)
+- Create function for updating and clearing calculator
 ✅ (client GET) retrieve history from server 
 ✅ (server GET) send history to client when requested
 - (client POST) send input to server 
