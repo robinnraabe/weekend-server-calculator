@@ -28,6 +28,17 @@ header {
     color: black;
 }  
 
+#display {
+    width: 160px;
+    display: inline-block;
+    border: 1px solid rgb(55, 55, 55);
+    box-shadow: inset 0px 0px 3px 3px rgb(49, 49, 49);
+    color: white;
+    margin-left: 20px;
+    padding: 20px 20px;
+    font-size: 20px;
+}
+
 button {
     background-color: rgb(37, 37, 37);
     color: white;
