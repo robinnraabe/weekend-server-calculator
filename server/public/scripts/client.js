@@ -26,18 +26,24 @@ function getHistory() {
 
 // Tracks which number/operator buttons are clicked
 // and displays on DOM
-function updateDisplay(buttonContent) {
+function addToDisplay(buttonContent) {
+    console.log(displayDiv.innerHTML);
+    // Replaces default 0 with new input in display
+    if (displayDiv.innerHTML == '0') {
+        displayDiv.innerHTML = `${buttonContent}`;
+    }
+    // Adds input after initial input in display
+    else {
         displayDiv.innerHTML += `${buttonContent}`;
-        displayArray.push(buttonContent);
-        // Update displayArray
-        // Clear display on HTML?
+    }
+    displayArray.push(buttonContent);
 }
-
 
 // Sends input to server when = is clicked
 function sendInput(event) {
     event.preventDefault();
     console.log('sendInput');
+    console.log(displayArray);
     axios.post('/calculator', displayArray
     ).then((response) => {
         console.log('POST successful!');
