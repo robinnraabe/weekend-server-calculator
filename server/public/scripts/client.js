@@ -39,6 +39,9 @@ function addToDisplay(buttonContent) {
     displayArray.push(buttonContent);
 }
 
+// function for operators that sets operatorBool=false 
+// and adds operator to div
+
 // Sends input to server when = is clicked
 function sendInput(event) {
     event.preventDefault();
