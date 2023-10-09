@@ -38,8 +38,8 @@ app.post('/calculator', (req, res) => {
     }
     let index = newInput.indexOf(operator);
     // Declares operands
-    let firstOperand = '';
-    let secondOperand = '';
+    let firstOperand = '0';
+    let secondOperand = '0';
     for (let str of newInput.slice(0, index)) {
         firstOperand += str;
     }
@@ -73,10 +73,15 @@ app.post('/calculator', (req, res) => {
         secondOperand: secondOperand,
         solution: solution
     };
-    if (solution != null) {
+    if (solution != null && isNaN(solution) == false) {
         history.push(newObject);
     }
     res.sendStatus(201);
+});
+
+app.delete('/calculator', (req, res) => {
+    history = [];
+    res.sendStatus(200);
 });
 
 app.listen(PORT, () => {

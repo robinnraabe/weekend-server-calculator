@@ -5,12 +5,11 @@ let operatorBool = false;
 
 function getHistory() {
     let historyDiv = document.querySelector('#history');
-    historyDiv.innerHTML = '';
+    historyDiv.innerHTML = `<button onClick="deleteHistory()">Delete Calculator History</button>`;
     axios.get('/calculator').then((response) => {
         console.log('History:', response.data);
         let history = response.data;
         for (let entry of history) {
-            console.log(entry);
             historyDiv.innerHTML += `
                 <li>
                     ${entry.firstOperand} ${entry.operator} 
@@ -27,38 +26,62 @@ function getHistory() {
 
 getHistory();
 
-// Tracks which number/operator buttons are clicked
-// and displays on DOM
+// Adds calculator input to array and displays on DOM
 function addToDisplay(buttonContent) {
     console.log(displayDiv.innerHTML);
     // Replaces default 0 with new input in display
     if (displayDiv.innerHTML == '0') {
         displayDiv.innerHTML = `${buttonContent}`;
+        displayArray.push(buttonContent);
     }
     // Adds input after initial input in display
     else {
+        // If last input was NOT an operator
         if (operatorBool == false) {
+            // If new input IS an operator
             if (buttonContent == '+' || buttonContent == '-' ||
             buttonContent == '/' || buttonContent == 'x') {
-            operatorBool = true;
+                operatorBool = true;
             }
-            if (operatorBool == false) {
+            // If new input is NOT an operator
+            else {
                 displayDiv.innerHTML += `${buttonContent}`;
             }
+            displayArray.push(buttonContent);
         }
+        // If last input WAS an operator
+        // AND new input is NOT an operator
         else {
-            displayDiv.innerHTML = `${buttonContent}`;
-            operatorBool = false;
+            if (buttonContent != '+' && buttonContent != '-' &&
+            buttonContent != '/' && buttonContent != 'x') {
+                displayDiv.innerHTML = `${buttonContent}`;
+                displayArray.push(buttonContent);
+                operatorBool = false;
+            }
         }
     }
-    displayArray.push(buttonContent);
 }
 
-// function for operators that sets operatorBool=false 
-// and adds operator to div?
+// Clears calculator display when AC is clicked
+function clearDisplay() {
+    displayDiv.innerHTML = '0';
+    displayArray = [];
+}
+
+// Deletes calculator history
+function deleteHistory() {
+    displayDiv.innerHTML = '0';
+    axios.delete('/calculator').then(() => {
+        getHistory();
+        console.log('getHistory executed after DELETE');
+    }).catch((error) => {
+        console.log(error);
+        alert('Something went wrong with DELETE!');
+    });
+}
 
 // Sends input to server when = is clicked
-function sendInput(event) {
+function pushInput(event) {
     event.preventDefault();
     console.log('sendInput');
     console.log(displayArray);
@@ -72,11 +95,4 @@ function sendInput(event) {
         console.log(error);
         alert('Something went wrong with POST!');
     });
-}
-
-function clear(event) {
-    event.preventDefault();
-        // Clears inputs for next round
-
-        // This needs to clear the client post before posting!
 }

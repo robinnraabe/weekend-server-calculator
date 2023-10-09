@@ -10,15 +10,15 @@ Additional README details can be found [here](https://github.com/PrimeAcademy/re
 
 
 Checklist:
--✅ Set up and linked base files
--✅ Create buttons for all numbers, operators, + clear option 
--✅ Create function for updating and clearing calculator display
--✅ (client GET) retrieve history from server 
--✅ (server GET) send history to client when requested
--✅ (client POST) send input to server 
--✅ (server POST) retrieve input, calculate output, add both to history
+- ✅ Set up and linked base files
+- ✅ Create buttons for all numbers, operators, + clear option 
+- ✅ Create function for updating and clearing calculator display
+- ✅ (client GET) retrieve history from server 
+- ✅ (server GET) send history to client when requested
+- ✅ (client POST) send input to server 
+- ✅ (server POST) retrieve input, calculate output, add both to history
 - finish styling (mostly done)
-- (client DELETE + server DELETE) remove history from server and display
+- ✅ (client DELETE + server DELETE) remove history from server and display
 - ability to re-run calculation
 
-PUSHED x8
+PUSHED x9

@@ -41,7 +41,7 @@ header {
 #history {
     width: calc(100% - 500px);
     float: right;
-    margin-top: 30px;
+    margin-top: 0px;
     padding: 20px;
     color: white;
     font-size: 18px;
