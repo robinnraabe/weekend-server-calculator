@@ -1,6 +1,7 @@
 console.log('Script sourced');
 let displayArray = [];
 let displayDiv = document.querySelector('#display');
+let operatorBool = false;
 
 function getHistory() {
     let historyDiv = document.querySelector('#history');
@@ -24,6 +25,8 @@ function getHistory() {
     console.log('getHistory successful!');
 }
 
+getHistory();
+
 // Tracks which number/operator buttons are clicked
 // and displays on DOM
 function addToDisplay(buttonContent) {
@@ -34,13 +37,25 @@ function addToDisplay(buttonContent) {
     }
     // Adds input after initial input in display
     else {
-        displayDiv.innerHTML += `${buttonContent}`;
+        if (operatorBool == false) {
+            if (buttonContent == '+' || buttonContent == '-' ||
+            buttonContent == '/' || buttonContent == 'x') {
+            operatorBool = true;
+            }
+            if (operatorBool == false) {
+                displayDiv.innerHTML += `${buttonContent}`;
+            }
+        }
+        else {
+            displayDiv.innerHTML = `${buttonContent}`;
+            operatorBool = false;
+        }
     }
     displayArray.push(buttonContent);
 }
 
 // function for operators that sets operatorBool=false 
-// and adds operator to div
+// and adds operator to div?
 
 // Sends input to server when = is clicked
 function sendInput(event) {
@@ -59,4 +74,9 @@ function sendInput(event) {
     });
 }
 
-getHistory();
+function clear(event) {
+    event.preventDefault();
+        // Clears inputs for next round
+
+        // This needs to clear the client post before posting!
+}
