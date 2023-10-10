@@ -2,6 +2,7 @@ console.log('Script sourced');
 let displayArray = [];
 let displayDiv = document.querySelector('#display');
 let operatorBool = false;
+let lastSolution = 0;
 
 function getHistory() {
     let historyDiv = document.querySelector('#history');
@@ -17,6 +18,9 @@ function getHistory() {
                 </li>
             `;
         }
+        lastSolution = history[history.length-1].solution;
+        displayDiv.innerHTML = `= ${lastSolution}`;
+
     }).catch((error) => {
         console.log(error);
         alert('Something went wrong with GET!');
@@ -29,10 +33,12 @@ getHistory();
 // Adds calculator input to array and displays on DOM
 function addToDisplay(buttonContent) {
     console.log(displayDiv.innerHTML);
-    // Replaces default 0 with new input in display
-    if (displayDiv.innerHTML == '0') {
+    // Replaces solution from last calculation
+    if (displayDiv.innerHTML == lastSolution
+        || displayDiv.innerHTML == `= ${lastSolution}`) {
         displayDiv.innerHTML = `${buttonContent}`;
         displayArray.push(buttonContent);
+        lastSolution = 0;
     }
     // Adds input after initial input in display
     else {
@@ -58,6 +64,8 @@ function addToDisplay(buttonContent) {
                 displayArray.push(buttonContent);
                 operatorBool = false;
             }
+            // If supplied multipl operators in a row
+            // only the first one is executed
         }
     }
 }
@@ -66,6 +74,7 @@ function addToDisplay(buttonContent) {
 function clearDisplay() {
     displayDiv.innerHTML = '0';
     displayArray = [];
+    lastSolution = 0;
 }
 
 // Deletes calculator history
@@ -88,7 +97,6 @@ function pushInput(event) {
     axios.post('/calculator', displayArray
     ).then((response) => {
         console.log('POST successful!');
-        displayDiv.innerHTML = '0';
         displayArray = [];
         getHistory();
     }).catch((error) => {

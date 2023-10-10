@@ -25,8 +25,9 @@ app.post('/calculator', (req, res) => {
     let newInput = req.body;
     let operator;
     let solution;
-     // Calculation goes here!
-    // Declares operator
+    let firstOperand = '0';
+    let secondOperand = '0';
+    // Assigns operator
     for (let str of newInput) {
         // Assigns operator
         if (str == '+' || 
@@ -36,10 +37,9 @@ app.post('/calculator', (req, res) => {
             operator = str;
         } 
     }
+    // Finds index of operator and assigns
+    // operands based on its index
     let index = newInput.indexOf(operator);
-    // Declares operands
-    let firstOperand = '0';
-    let secondOperand = '0';
     for (let str of newInput.slice(0, index)) {
         firstOperand += str;
     }
@@ -48,14 +48,13 @@ app.post('/calculator', (req, res) => {
     }
     firstOperand = Number(firstOperand);
     secondOperand = Number(secondOperand);
-    console.log(firstOperand, operator, secondOperand); // test
     // Computes solution
     if (operator == 'x') {
         solution = firstOperand * secondOperand;
     }
     else if (operator == '/') {
         solution = firstOperand / secondOperand;
-        operator = '&#247;';
+        operator = '&#247;'; // For styling
     }
     else if (operator == '+') {
         solution = firstOperand + secondOperand;
@@ -73,7 +72,7 @@ app.post('/calculator', (req, res) => {
         secondOperand: secondOperand,
         solution: solution
     };
-    if (solution != null && isNaN(solution) == false) {
+    if (newObject.solution !== 'null' && isNaN(solution) == false) {
         history.push(newObject);
     }
     res.sendStatus(201);
