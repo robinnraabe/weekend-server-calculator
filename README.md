@@ -2,9 +2,9 @@
 Weekend Server Calculator
 
 ## Description
-To start:
-    `npm install express`
-    `npm start`
+To start: 
+    <br />`npm install express`
+    <br />`npm start`
 
 The organization for this one feels more convoluted than I'd like, but I did what I needed to do to get all of the functionality and styling that I wanted. 
 
