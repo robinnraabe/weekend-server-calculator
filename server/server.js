@@ -16,11 +16,12 @@ let history = [
     }
 ];
 
+// Sends history to client
 app.get('/calculator', (req, res) => {
-    console.log('Request made for /calculator');
     res.send(history);
 });
 
+// Receives data, computes solution, adds to history
 app.post('/calculator', (req, res) => {
     console.log('Req.body:', req.body);
     let newInput = req.body;
@@ -47,6 +48,7 @@ app.post('/calculator', (req, res) => {
     for (let str of newInput.slice(index+1)) {
         secondOperand += str;
     }
+    // Checks if operands are numbers
     if (firstOperand != '' && secondOperand != '') {
         firstOperand = Number(firstOperand);
         secondOperand = Number(secondOperand);
@@ -92,6 +94,7 @@ app.post('/calculator', (req, res) => {
     res.sendStatus(201);
 });
 
+// Deletes history
 app.delete('/calculator', (req, res) => {
     history = [];
     res.sendStatus(200);

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Calculator</title>
 </head>
 <body>
     <header>
@@ -32,12 +32,12 @@
             <br />
             <button class="decimal" onClick="addToDisplay('.')">.</button>
             <button onClick="addToDisplay(0)">0</button>
-            <button class="equal" onClick="pushInput(event)">=</button>
+            <button class="equal" onClick="sendInput(event)">=</button>
             <button class="operator" onClick="addToDisplay('-')">&minus;</button>
         </div>
         <div id="history-title">
             <button class="delete" onClick="deleteHistory()">Delete Calculator History</button>
-            <h4>Click any expression to re-display its solution</h4>
+            <h4>Click any expression below to re-display its solution</h4>
         </div>
         <div id="history">
 

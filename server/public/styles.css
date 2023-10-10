@@ -16,12 +16,12 @@ header {
 /* Style for display screen on calculator */
 #display {
     width: 160px;
-    display: inline-block;
+    float: left;
     overflow: hidden;
     border: 1px solid rgb(55, 55, 55);
     box-shadow: inset 0px 0px 3px 3px rgb(30, 30, 30);
     color: white;
-    margin-left: 20px;
+    margin: 0px 10px 0px 20px;
     padding: 20px 20px;
     font-size: 20px;
     background-color: black
@@ -31,7 +31,7 @@ header {
 #calculator {
     width: 335px;
     float: left;
-    margin: 30px 0px 20px 20px;
+    margin: 30px 0px 20px 50px;
     padding: 30px 20px 30px 30px;
     border: 2px solid rgb(48, 48, 48);
     box-shadow: 0px 0px 3px 3px rgb(30, 30, 30);
@@ -48,10 +48,10 @@ header {
 }
 
 #history {
-    width: 200px;
+    width: 400px;
     text-align: left;
     float: left;
-    margin-left: 160px;
+    margin-left: 30px;
     margin-top: 0px;
     padding: 20px;
     color: white;
@@ -70,6 +70,11 @@ button {
     padding: 20px 25px 20px 25px;
     display: inline;
     float: center;
+    transition: .1s;
+}
+
+button:hover {
+    background-color: rgb(51, 51, 51);
 }
 
 /* Styles for specific buttons */
@@ -77,8 +82,16 @@ button {
     background-color: rgb(146, 95, 0);
 }
 
+.operator:hover {
+    background-color: rgb(179, 116, 0);
+}
+
 .equal {
     background-color: rgb(31, 94, 131);
+}
+
+.equal:hover {
+    background-color: rgb(40, 112, 154);
 }
 
 .decimal {
@@ -92,11 +105,6 @@ button {
     transition: .1s;
 }
 
-.delete:hover {
-    background-color: rgb(51, 51, 51);
-}
-
-
 .recalculate {
     font-size: 16px;
     background-color: black;
@@ -109,6 +117,7 @@ button {
 }
 
 .recalculate:hover {
+    background-color: black;
     color: gray;
 }
 
