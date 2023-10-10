@@ -6,20 +6,30 @@ let lastSolution = 0;
 
 function getHistory() {
     let historyDiv = document.querySelector('#history');
-    historyDiv.innerHTML = `<button onClick="deleteHistory()">Delete Calculator History</button>`;
+    historyDiv.innerHTML = ``;
     axios.get('/calculator').then((response) => {
         console.log('History:', response.data);
         let history = response.data;
         for (let entry of history) {
-            historyDiv.innerHTML += `
-                <li>
-                    ${entry.firstOperand} ${entry.operator} 
-                    ${entry.secondOperand} = ${entry.solution}
-                </li>
-            `;
+            if (entry.compute == true) {
+                historyDiv.innerHTML += `
+                    <li><button class="recalculate" onClick="recalculate(${entry.solution})"> 
+                        ${entry.firstOperand} 
+                        ${entry.operator} 
+                        ${entry.secondOperand}
+                    </button></li>
+                `;
+                if (history.length > 0) {
+                    lastSolution = history[history.length-1].solution;
+                    displayDiv.innerHTML = `= ${lastSolution}`;
+                }
+            }
+            else {
+                lastSolution = 0;
+                displayDiv.innerHTML = '0';
+                displayArray = [];
+            }
         }
-        lastSolution = history[history.length-1].solution;
-        displayDiv.innerHTML = `= ${lastSolution}`;
 
     }).catch((error) => {
         console.log(error);
@@ -33,11 +43,13 @@ getHistory();
 // Adds calculator input to array and displays on DOM
 function addToDisplay(buttonContent) {
     console.log(displayDiv.innerHTML);
+    console.log(displayArray);
+    console.log(displayDiv.innerHTML == lastSolution);
     // Replaces solution from last calculation
     if (displayDiv.innerHTML == lastSolution
         || displayDiv.innerHTML == `= ${lastSolution}`) {
         displayDiv.innerHTML = `${buttonContent}`;
-        displayArray.push(buttonContent);
+        displayArray = [buttonContent];
         lastSolution = 0;
     }
     // Adds input after initial input in display
@@ -77,10 +89,19 @@ function clearDisplay() {
     lastSolution = 0;
 }
 
+// Recalculates expressions from history when button is clicked
+function recalculate(solution) {
+    clearDisplay();
+    addToDisplay(`= ${solution}`);
+    lastSolution = `= ${solution}`;
+    console.log(displayDiv.innerHTML, '==', lastSolution);
+}
+
 // Deletes calculator history
 function deleteHistory() {
     displayDiv.innerHTML = '0';
     axios.delete('/calculator').then(() => {
+        lastSolution = 0;
         getHistory();
         console.log('getHistory executed after DELETE');
     }).catch((error) => {

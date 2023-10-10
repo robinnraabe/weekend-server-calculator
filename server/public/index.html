@@ -35,8 +35,12 @@
             <button class="equal" onClick="pushInput(event)">=</button>
             <button class="operator" onClick="addToDisplay('-')">&minus;</button>
         </div>
+        <div id="history-title">
+            <button class="delete" onClick="deleteHistory()">Delete Calculator History</button>
+            <h4>Click any expression to re-display its solution</h4>
+        </div>
         <div id="history">
-            <button onClick="deleteHistory()">Delete Calculator History</button>
+
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

@@ -8,7 +8,8 @@ app.use(express.static('server/public'));
 let history = [
     {
         // test object
-        firstOperand: 5,
+        compute: true,
+        firstOperand: 'example: 5',
         operator: 'x',
         secondOperand: 3,
         solution: 15
@@ -25,8 +26,8 @@ app.post('/calculator', (req, res) => {
     let newInput = req.body;
     let operator;
     let solution;
-    let firstOperand = '0';
-    let secondOperand = '0';
+    let firstOperand = '';
+    let secondOperand = '';
     // Assigns operator
     for (let str of newInput) {
         // Assigns operator
@@ -46,33 +47,46 @@ app.post('/calculator', (req, res) => {
     for (let str of newInput.slice(index+1)) {
         secondOperand += str;
     }
-    firstOperand = Number(firstOperand);
-    secondOperand = Number(secondOperand);
-    // Computes solution
-    if (operator == 'x') {
-        solution = firstOperand * secondOperand;
-    }
-    else if (operator == '/') {
-        solution = firstOperand / secondOperand;
-        operator = '&#247;'; // For styling
-    }
-    else if (operator == '+') {
-        solution = firstOperand + secondOperand;
-    }
-    else if (operator == '-') {
-        solution = firstOperand - secondOperand;
+    if (firstOperand != '' && secondOperand != '') {
+        firstOperand = Number(firstOperand);
+        secondOperand = Number(secondOperand);
+        // Computes solution
+        if (operator == 'x') {
+            solution = firstOperand * secondOperand;
+        }
+        else if (operator == '/') {
+            solution = firstOperand / secondOperand;
+            operator = '&#247;'; // For styling
+        }
+        else if (operator == '+') {
+            solution = firstOperand + secondOperand;
+        }
+        else if (operator == '-') {
+            solution = firstOperand - secondOperand;
+        }
     }
     else {
-        solution = null;
+            solution = null;
     }
     // Creates + pushes new object to calculator history
     let newObject = {
+        compute: true,
         firstOperand: firstOperand,
         operator: operator,
         secondOperand: secondOperand,
         solution: solution
     };
-    if (newObject.solution !== 'null' && isNaN(solution) == false) {
+    if (newObject.solution != null 
+        && isNaN(solution) == false 
+        && firstOperand != '' 
+        && secondOperand != '') {
+        history.push(newObject);
+    }
+    else {
+        newObject = {
+            compute: false,
+            solution: 0
+        }
         history.push(newObject);
     }
     res.sendStatus(201);
