@@ -14,10 +14,13 @@ Computing the solutions on the server-side also took some time. The primary issu
 
 # Functionality
 In short, the buttons on the calculator add their contents to an array, which is submitted to the server when the equal sign is clicked. 
+
 The array is parsed to determine the two operands and the operator, and a solution is calculated. If the array contains bad data, the server adds a partial object to the array, with just enough data to tell the client NOT to post that object to the DOM, and how to reset the calculator's display. 
+
 Ideally it would be nice to determine if the data was good BEFORE sending to server, but it was easier to keep track of the display calculations on the client.js vs the math/validity calculations on the server.
 
-Types of bad data that were considered:
+Types of bad data that were considered: 
+
     - Starting or ending with an operator 
             eg.  - 67 +/
             =>    null
